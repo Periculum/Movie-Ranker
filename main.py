@@ -14,7 +14,7 @@ ELO_K = 32
 RECOMMENDED_COMPARISONS = 500
 
 LOW_ELO_THRESHOLD = 1420
-HIGH_ELO_THRESHOLD = 1550
+HIGH_ELO_THRESHOLD = 1565
 LOW_ELO_WEIGHT = 0.05
 HIGH_ELO_WEIGHT = 2.0
 
@@ -67,7 +67,6 @@ def film_weight(film, films):
         top_films = [f for f in films if f['elo'] >= HIGH_ELO_THRESHOLD]
         max_comp = max((f['comparisons'] for f in top_films),default=1)
         weight *= (2 - film['comparisons'] / max_comp)
-        print(film, weight)
 
     return weight
 
