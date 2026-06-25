@@ -154,6 +154,9 @@ const progressFill = document.querySelector("#progressFill");
 const rankingBody = document.querySelector("#rankingBody");
 const resultsInfo = document.querySelector("#resultsInfo");
 
+const exportButton = document.querySelector("#exportButton");
+const finetuneButton = document.querySelector("#finetuneButton");
+
 const cards = [
   document.querySelector("#card0"),
   document.querySelector("#card1")
@@ -390,6 +393,23 @@ function exportTxt() {
   URL.revokeObjectURL(url);
 }
 
+function startFinetuning() {
+  const ranked = films
+    .filter(film => !film.skipped)
+    .slice()
+    .sort((a, b) => b.elo - a.elo);
+
+  const top20 = ranked.slice(0, Math.ceil(ranked.length * 0.2));
+
+  films = top20.map(film => newFilm(film.title, film.year, film.director));
+  comparisons = 0;
+  history = [];
+  pair = [];
+  comparedPairs = new Set();
+
+  startQuiz();
+}
+
 // ── Utils ───────────────────────────────────────────────────────────────────
 
 function weightedChoice(items, weights) {
@@ -438,7 +458,8 @@ undoButton.addEventListener("click", undo);
 resultsButton.addEventListener("click", showResults);
 resetButton.addEventListener("click", () => window.location.reload());
 backButton.addEventListener("click", () => showPage(quizPage));
-document.querySelector("#exportButton").addEventListener("click", exportTxt);
+exportButton.addEventListener("click", exportTxt);
+finetuneButton.addEventListener("click", startFinetuning);
 
 cards.forEach((card, side) => {
   card.addEventListener("click", () => choose(side));
