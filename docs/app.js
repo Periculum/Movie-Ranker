@@ -454,10 +454,12 @@ newTitleInput.addEventListener("keydown", event => {
 addFilmButton.addEventListener("click", addFilm);
 listSelect.addEventListener("change", () => resetRankingForList(listSelect.value));
 startButton.addEventListener("click", startQuiz);
+
 undoButton.addEventListener("click", undo);
 resultsButton.addEventListener("click", showResults);
 resetButton.addEventListener("click", () => window.location.reload());
 backButton.addEventListener("click", () => showPage(quizPage));
+
 exportButton.addEventListener("click", exportTxt);
 finetuneButton.addEventListener("click", startFinetuning);
 
